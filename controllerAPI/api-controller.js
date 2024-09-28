@@ -88,5 +88,48 @@ router.get('/fundraiser', (req, res) => {
     });
 });
 
+// Retrieve fundraiser details and donations by fundraiser ID
+router.get('/fundraiser-details', (req, res) => {
+    const { id } = req.query;
+    
+    // Query to get fundraiser details
+    const fundraiserQuery = `
+        SELECT f.FUNDRAISER_ID, f.ORGANIZER, f.CAPTION, f.TARGET_FUNDING, f.CURRENT_FUNDING, f.CITY, c.NAME as CATEGORY
+        FROM fundraiser f
+        JOIN category c ON f.CATEGORY_ID = c.CATEGORY_ID
+        WHERE f.FUNDRAISER_ID = ${id};
+    `;
+    
+    // Query to get donations for the fundraiser
+    const donationQuery = `
+        SELECT d.DONATION_ID, d.DATE, d.AMOUNT, d.GIVER
+        FROM donation d
+        WHERE d.FUNDRAISER_ID = ${id};
+    `;
+
+    // Execute the fundraiser query
+    connection.query(fundraiserQuery, (err, fundraiserResult) => {
+        if (err) {
+            console.error("Error while performing query:", err);
+            res.status(500).send("Error while performing query.");
+        } else if (fundraiserResult.length === 0) {
+            res.status(404).send("Fundraiser not found.");
+        } else {
+            // If fundraiser exists, query for donations
+            connection.query(donationQuery, (donationErr, donationResult) => {
+                if (donationErr) {
+                    console.error("Error while retrieving donations:", donationErr);
+                    res.status(500).send("Error while retrieving donations.");
+                } else {
+                    // Send both fundraiser details and donations in the response
+                    res.json({
+                        fundraiser: fundraiserResult[0],   // Fundraiser details
+                        donations: donationResult          // List of donations (can be empty if no donations)
+                    });
+                }
+            });
+        }
+    });
+});
 
 module.exports = router;
