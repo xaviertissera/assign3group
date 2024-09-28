@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraiser Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button.update {
+            background-color: #0275d8;
+        }
+        button.delete {
+            background-color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fundraiser Management</h1>
+
+        <!-- Add New Fundraiser Form -->
+        <h2>Add New Fundraiser</h2>
+        <form id="addFundraiserForm">
+            <label for="organizer">Organizer</label>
+            <input type="text" id="organizer" name="organizer" required>
+
+            <label for="caption">Caption</label>
+            <input type="text" id="caption" name="caption" required>
+
+            <label for="target_funding">Target Funding</label>
+            <input type="number" id="target_funding" name="target_funding" required>
+
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+
+            <label for="category_id">Category ID</label>
+            <input type="number" id="category_id" name="category_id" required>
+
+            <button type="submit">Add Fundraiser</button>
+        </form>
+
+        <!-- Update Fundraiser Form -->
+        <h2>Update Fundraiser</h2>
+        <form id="updateFundraiserForm">
+            <label for="update_id">Fundraiser ID</label>
+            <input type="number" id="update_id" name="id" required>
+
+            <label for="update_organizer">Organizer</label>
+            <input type="text" id="update_organizer" name="organizer" required>
+
+            <label for="update_caption">Caption</label>
+            <input type="text" id="update_caption" name="caption" required>
+
+            <label for="update_target_funding">Target Funding</label>
+            <input type="number" id="update_target_funding" name="target_funding" required>
+
+            <label for="update_city">City</label>
+            <input type="text" id="update_city" name="city" required>
+
+            <label for="update_category_id">Category ID</label>
+            <input type="number" id="update_category_id" name="category_id" required>
+
+            <button type="submit" class="update">Update Fundraiser</button>
+        </form>
+
+        <!-- Delete Fundraiser Form -->
+        <h2>Delete Fundraiser</h2>
+        <form id="deleteFundraiserForm">
+            <label for="delete_id">Fundraiser ID</label>
+            <input type="number" id="delete_id" name="id" required>
+            <button type="submit" class="delete">Delete Fundraiser</button>
+        </form>
+    </div>
+
+    <!-- Script References -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/google-map.js"></script>
+    <script src="js/main.js"></script>
+    <script src="scripts/script.js"></script>
+
+    <script>
+        // Add Fundraiser
+        document.getElementById('addFundraiserForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const organizer = document.getElementById('organizer').value;
+            const caption = document.getElementById('caption').value;
+            const target_funding = document.getElementById('target_funding').value;
+            const city = document.getElementById('city').value;
+            const category_id = document.getElementById('category_id').value;
+
+            fetch('/fundraisers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ organizer, caption, target_funding, city, category_id })
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message));
+        });
+
+        // Update Fundraiser
+        document.getElementById('updateFundraiserForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const id = document.getElementById('update_id').value;
+            const organizer = document.getElementById('update_organizer').value;
+            const caption = document.getElementById('update_caption').value;
+            const target_funding = document.getElementById('update_target_funding').value;
+            const city = document.getElementById('update_city').value;
+            const category_id = document.getElementById('update_category_id').value;
+
+            fetch(`/fundraisers/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ organizer, caption, target_funding, city, category_id })
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message));
+        });
+
+        // Delete Fundraiser
+        document.getElementById('deleteFundraiserForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const id = document.getElementById('delete_id').value;
+
+            fetch(`/fundraisers/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message));
+        });
+    </script>
+</body>
+</html>
