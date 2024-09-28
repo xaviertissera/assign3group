@@ -36,7 +36,7 @@ function fetchActiveFundraisers() {
 
 // Function to redirect to the donation page
 function redirectToDonate(fundraiserId) {
-    window.location.href = `http://localhost:3063/donation.html?id=${fundraiserId}`;
+    window.location.href = `/donation.html?id=${fundraiserId}`;
 }
 
 // Call the fetch function when the page loads
