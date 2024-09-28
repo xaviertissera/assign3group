@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Admin-add new fundraiser</title>
     <!-- Link to the external stylesheet -->
     <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -13,49 +13,34 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Client-View</a>
+            <a class="navbar-brand" href="../index.html">Client-View</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="inxdex.html">Add New</a>
+                        <a class="nav-link" href="add.html">Add New</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="list.html">Edit Existing</a>
+                        <a class="nav-link" href="index.html">Edit Existing</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    
+    <!-- Page Header -->
+    <header class="container text-center my-4">
+        <h1>Add New Fundraiser</h1>
+    </header>
 
     <!-- Fundraisers Section -->
     <section class="container">
-        <div class="container">
-            <h1 class="my-4">Fundraiser List</h1>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Caption</th>
-                        <th>Organizer</th>
-                        <th>Active Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="fundraiser-table-body">
-                    <!-- Fundraiser rows will be inserted here dynamically -->
-                </tbody>
-            </table>
+        <div class="row" id="fundraiser-list">
+            <!-- Fundraiser cards will be dynamically added here -->
         </div>
-    
-        <!-- Link to your custom JavaScript file -->
-        <script src="list.js"></script>
     </section>
-
 
     <footer class="footer bg-dark text-white mt-5 py-3">
         <div class="container text-center">

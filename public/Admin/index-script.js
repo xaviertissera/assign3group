@@ -15,7 +15,7 @@ function fetchFundraisers() {
                     <td>${fundraiser.CAPTION}</td>
                     <td>${fundraiser.ORGANIZER}</td>
                     <td>${fundraiser.ACTIVE ? 'Active' : 'Inactive'}</td>
-                    <td><button class="btn btn-primary" onclick="redirectToEdit(${fundraiser.FUNDRAISER_ID})">Edit</button></td>
+                    <td><button class="btn btn-primary" onclick="redirectToEdit(${fundraiser.FUNDRAISER_ID})">Edit/Delete</button></td>
                 `;
 
                 fundraiserTable.appendChild(row);
