@@ -10,7 +10,7 @@ function fetchActiveFundraisers() {
                 const fundraiserItem = document.createElement('div');
                 fundraiserItem.classList.add('col-md-4', 'mb-4');
 
-                // Creating a Bootstrap card for each fundraiser
+                // Creating a Bootstrap card for each fundraiser with a Donate button
                 fundraiserItem.innerHTML = `
                     <div class="card h-100">
                         <div class="card-body">
@@ -22,6 +22,8 @@ function fetchActiveFundraisers() {
                         </div>
                         <div class="card-footer text-center">
                             <small class="text-muted">Current: $${fundraiser.CURRENT_FUNDING} | Target: $${fundraiser.TARGET_FUNDING}</small>
+                            <br><br>
+                            <button class="btn btn-primary" onclick="redirectToDonate(${fundraiser.FUNDRAISER_ID})">Donate</button>
                         </div>
                     </div>
                 `;
@@ -30,6 +32,11 @@ function fetchActiveFundraisers() {
             });
         })
         .catch(error => console.error('Error fetching fundraisers:', error));
+}
+
+// Function to redirect to the donation page
+function redirectToDonate(fundraiserId) {
+    window.location.href = `http://localhost:3063/donation.html?id=${fundraiserId}`;
 }
 
 // Call the fetch function when the page loads
