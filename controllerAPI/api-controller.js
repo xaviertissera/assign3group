@@ -179,4 +179,21 @@ router.post('/donation', (req, res) => {
     });
 });
 
+// Retrieve all fundraisers with id, caption, organizer, and active status
+router.get('/fundraisers', (req, res) => {
+    const query = `
+        SELECT FUNDRAISER_ID, CAPTION, ORGANIZER, ACTIVE
+        FROM fundraiser;
+    `;
+
+    connection.query(query, (err, rows) => {
+        if (err) {
+            console.error("Error while retrieving fundraisers:", err);
+            res.status(500).send("Error while retrieving fundraisers.");
+        } else {
+            res.json(rows);  // Send the result as a JSON response
+        }
+    });
+});
+
 module.exports = router;
