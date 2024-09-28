@@ -1,0 +1,62 @@
+/* style.css */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+}
+
+/* style.css */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+}
+
+#search-results {
+    margin-top: 20px;
+}
+
+/* style.css */
+.card-footer {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Add this to style.css or your main CSS file */
+select.form-select {
+    height: 58px;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: 4px; 
+    border: 1px solid #ced4da;
+    appearance: none;
+    background-color: white;
+}
+
+select.form-select:focus {
+    border-color: #80bdff; /* Highlight on focus */
+    outline: 0;
+    box-shadow: 0 0 5px rgba(128, 189, 255, 0.5); /* Add a focus shadow */
+}
