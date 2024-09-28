@@ -132,4 +132,51 @@ router.get('/fundraiser-details', (req, res) => {
     });
 });
 
+// Insert a new donation for a fundraiser
+router.post('/donation', (req, res) => {
+    const { fundraiserId, giver, amount } = req.body;
+
+    // Check if the donation is at least 5 AUD
+    if (amount < 5) {
+        return res.status(400).json({ message: "Minimum donation amount is 5 AUD" });
+    }
+
+    // First, get the fundraiser caption
+    const getFundraiserQuery = `
+        SELECT CAPTION FROM fundraiser WHERE FUNDRAISER_ID = ?;
+    `;
+
+    connection.query(getFundraiserQuery, [fundraiserId], (err, fundraiserResult) => {
+        if (err) {
+            console.error("Error while retrieving fundraiser:", err);
+            return res.status(500).send("Error while retrieving fundraiser.");
+        }
+
+        if (fundraiserResult.length === 0) {
+            return res.status(404).send("Fundraiser not found.");
+        }
+
+        const fundraiserCaption = fundraiserResult[0].CAPTION;
+
+        // Now, insert the donation
+        const insertDonationQuery = `
+            INSERT INTO donation (DATE, AMOUNT, GIVER, FUNDRAISER_ID)
+            VALUES (NOW(), ?, ?, ?);
+        `;
+
+        connection.query(insertDonationQuery, [amount, giver, fundraiserId], (insertErr, result) => {
+            if (insertErr) {
+                console.error("Error while inserting donation:", insertErr);
+                return res.status(500).send("Error while inserting donation.");
+            }
+
+            // Send success message along with the fundraiser caption
+            res.json({
+                message: "Donation successfully added",
+                fundraiserCaption: fundraiserCaption  // Send the caption in response
+            });
+        });
+    });
+});
+
 module.exports = router;

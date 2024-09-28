@@ -53,7 +53,7 @@ function donate() {
     const fundraiserId = getFundraiserId();
     
     // Redirect to the donation page
-    window.location.href = `/donation?id=${fundraiserId}`;
+    window.location.href = `/donation.html?id=${fundraiserId}`;
 }
 
 window.onload = fetchFundraiserDetailsAndDonations;
