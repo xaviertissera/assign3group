@@ -36,12 +36,62 @@
     </header>
 
     <!-- Fundraisers Section -->
-    <section class="container">
-        <div class="row" id="fundraiser-list">
-            <!-- Fundraiser cards will be dynamically added here -->
-        </div>
-    </section>
+    <!-- Add New Fundraiser Form -->
+<h2>Add New Fundraiser</h2>
+<form id="addFundraiserForm">
+    <label for="organizer">Organizer</label>
+    <input type="text" id="organizer" name="organizer" required>
 
+    <label for="caption">Caption</label>
+    <input type="text" id="caption" name="caption" required>
+
+    <label for="target_funding">Target Funding</label>
+    <input type="number" id="target_funding" name="target_funding" required>
+
+    <label for="city">City</label>
+    <input type="text" id="city" name="city" required>
+
+    <label for="category_id">Category ID</label>
+    <input type="number" id="category_id" name="category_id" required>
+
+    <button type="submit">Add Fundraiser</button>
+</form>
+
+<!-- JavaScript for form submission -->
+<script>
+    document.getElementById('addFundraiserForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Get form values
+        const organizer = document.getElementById('organizer').value;
+        const caption = document.getElementById('caption').value;
+        const target_funding = document.getElementById('target_funding').value;
+        const city = document.getElementById('city').value;
+        const category_id = document.getElementById('category_id').value;
+
+        // Submit form data via fetch (AJAX)
+        fetch('/api/add-fundraiser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                organizer: organizer,
+                caption: caption,
+                target_funding: target_funding,
+                city: city,
+                category_id: category_id
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);  // Display success or error message
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
     <footer class="footer bg-dark text-white mt-5 py-3">
         <div class="container text-center">
             <p class="mb-0">Developed by <strong>Xavier</strong> and <strong>Thisuka</strong></p>
