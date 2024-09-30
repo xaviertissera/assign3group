@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Fundraiser</title>
+    <title>Donation Fundraisers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -23,10 +23,12 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -41,15 +43,15 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="search.html" class="nav-link">Search</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="search.html" class="nav-link">Search</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- END nav -->
 
-    <div class="hero-wrap" style="background-image: url('images/bg_5.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center"
@@ -57,25 +59,69 @@
                 <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
                     <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
                             class="mr-2"><a href="index.html">Home</a></span> <span>Search</span></p>
-                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Welcome to
-                        the Fundraiser Platform</h1>
+                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Let's Make a
+                        Donation
+                    </h1>
                 </div>
             </div>
         </div>
     </div>
 
 
+    <section class="ftco-section contact-section ftco-degree-bg">
+        <div class="container">
 
 
-    <section class="ftco-section-2 img">
-        <div class="container mt-5">
-            <h1 class="text-center mb-4">Active Fundraiser Programs</h1>
-            <div class="row" id="fundraiser-list"></div>
+
+            <div class="row block-9">
+                <div class="col-md-12 pr-md-5">
+                    <div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+                        <strong>Errors Existing:</strong> <br><span id="errorMessage" style="color: black;"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Placeholder for the thank-you message -->
+                    <div id="thankYouAlert" class="alert alert-warning alert-dismissible fade show d-none" role="alert">
+                        <strong>Thank you!</strong> <span id="thankYouMessage" style="color: black;"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                    <h2>Donation to <span id="fundraiser-name" style="color: black;"></span></h2>
+                    <br>
+                    <form id="donation-form">
+                        <div class="form-group">
+                            <label for="giver-name">Your Name:</label>
+                            <input class="form-control" type="text" id="giver-name"><br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="donation-amount">Donation Amount (AUD):</label>
+                            <input class="form-control" type="number" id="donation-amount"><br>
+                        </div>
+
+
+                        <div class="form-group">
+                            <button class="btn btn-primary mx-2" type="submit">Submit my donation</button>
+                        </div>
+
+                    </form>
+
+
+                    <div id="error-message" class="text-danger fw-bold"></div>
+
+                    <!-- Search Results -->
+                    <div class="row" id="search-results"></div>
+
+                </div>
+
+
+            </div>
         </div>
     </section>
-
-
-
 
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
@@ -85,7 +131,8 @@
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">About Us</h2>
                         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</p>
+                            there live the
+                            blind texts.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -109,11 +156,13 @@
                         <div class="block-23 mb-3">
                             <ul>
                                 <li><span class="icon icon-map-marker"></span><span class="text">203, Ardgower Rd, Noble
-                                        Park 3174</span></li>
+                                        Park
+                                        3174</span></li>
                                 <li><a href="#"><span class="icon icon-phone"></span><span
                                             class="text">0451234543</span></a></li>
                                 <li><a href="#"><span class="icon icon-envelope"></span><span
-                                            class="text">info@newlife.com</span></a></li>
+                                            class="text">info@newlife.com</span></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -125,14 +174,14 @@
                     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;
                         <script>document.write(new Date().getFullYear());</script> All rights reserved | Developed by
-                        Xavier Tissera</a>
+                        Xavier
+                        Tissera</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
             </div>
         </div>
     </footer>
-
 
 
     <!-- loader -->
@@ -157,10 +206,9 @@
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/jquery.timepicker.min.js"></script>
     <script src="js/scrollax.min.js"></script>
-    <script src="js/google-map.js"></script>
-    <script src="js/main.js"></script>
-    <script src="scripts/script.js"></script>
 
+    <script src="js/main.js"></script>
+    <script src="scripts/donation.js"></script>
 </body>
 
 </html>
