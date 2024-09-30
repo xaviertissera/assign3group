@@ -52,13 +52,21 @@
     <input type="text" id="city" name="city" required>
 
     <label for="category">Category</label>
-    <select id="category" name="category_id" required>
-        <option value="">Select a category</option>
+<select id="category" name="category_id" required>
+    <option value="">Select a Category</option>
+    <option value="1">Health & Medical</option>
+    <option value="2">Education</option>
+    <option value="3">Environment</option>
+</select>
     </select>
-
-    <label for="active">Active</label>
-    <input type="checkbox" id="active" name="active" checked> Active
-
+    <label for="status">Status</label>
+    <div id="status">
+        <input type="radio" id="active" name="status" value="1" checked>
+        <label for="active">Active</label>
+    
+        <input type="radio" id="inactive" name="status" value="0">
+        <label for="inactive">Inactive</label>
+    </div>    
     <button type="submit">Add Fundraiser</button>
 </form>
 <!-- JavaScript for form submission and dropdown population -->

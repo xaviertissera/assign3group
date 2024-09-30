@@ -197,7 +197,7 @@ router.get('/fundraisers', (req, res) => {
 });
 // API route to handle adding a new fundraiser
 router.post('/add-fundraiser', (req, res) => {
-    const { organizer, caption, target_funding, city, category_id } = req.body;
+    const { organizer, caption, target_funding, city, category_id, active } = req.body;
 
     // Validation to check if all fields are provided
     if (!organizer || !caption || !target_funding || !city || !category_id) {
@@ -207,11 +207,11 @@ router.post('/add-fundraiser', (req, res) => {
     // SQL query to insert a new fundraiser
     const query = `
         INSERT INTO fundraiser (ORGANIZER, CAPTION, TARGET_FUNDING, CITY, CATEGORY_ID, ACTIVE, CURRENT_FUNDING)
-        VALUES (?, ?, ?, ?, ?, 1, 0);
+        VALUES (?, ?, ?, ?, ?, ?, 0);
     `;
 
     // Execute the query
-    connection.query(query, [organizer, caption, target_funding, city, category_id], (err, result) => {
+    connection.query(query, [organizer, caption, target_funding, city, category_id, active], (err, result) => {
         if (err) {
             console.error("Error while inserting fundraiser:", err);
             return res.status(500).json({ success: false, message: 'Database error. Failed to add fundraiser.' });
@@ -219,6 +219,19 @@ router.post('/add-fundraiser', (req, res) => {
 
         // Respond with success message
         return res.status(200).json({ success: true, message: 'Fundraiser added successfully!' });
+    });
+});
+
+// API route to fetch categories (for the dropdown)
+router.get('/categories', (req, res) => {
+    const query = 'SELECT CATEGORY_ID, NAME FROM category';
+
+    connection.query(query, (err, rows) => {
+        if (err) {
+            console.error("Error while fetching categories:", err);
+            return res.status(500).send("Error while fetching categories.");
+        }
+        res.json(rows); // Send the list of categories as a JSON response
     });
 });
 module.exports = router;
