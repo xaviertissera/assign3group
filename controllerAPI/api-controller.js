@@ -234,4 +234,36 @@ router.get('/categories', (req, res) => {
         res.json(rows); // Send the list of categories as a JSON response
     });
 });
+// API route to handle updating an existing fundraiser
+router.put('/api/update-fundraiser', (req, res) => {
+    const { id, organizer, caption, target_funding, city, category_id, active } = req.body;
+
+    // Validate that all fields are provided
+    if (!id || !organizer || !caption || !target_funding || !city || !category_id || active === undefined) {
+        return res.status(400).json({ success: false, message: 'Please provide all required fields.' });
+    }
+
+    // SQL query to update the existing fundraiser
+    const query = `
+        UPDATE fundraiser 
+        SET ORGANIZER = ?, CAPTION = ?, TARGET_FUNDING = ?, CITY = ?, CATEGORY_ID = ?, ACTIVE = ?
+        WHERE FUNDRAISER_ID = ?;
+    `;
+
+    // Execute the SQL query to update the fundraiser
+    connection.query(query, [organizer, caption, target_funding, city, category_id, active, id], (err, result) => {
+        if (err) {
+            console.error('Error updating fundraiser:', err);
+            return res.status(500).json({ success: false, message: 'Database error. Unable to update fundraiser.' });
+        }
+
+        if (result.affectedRows === 0) {
+            // No rows were updated, meaning the ID didn't match any existing record
+            return res.status(404).json({ success: false, message: 'Fundraiser not found.' });
+        }
+
+        // If successful, return a success message
+        return res.status(200).json({ success: true, message: 'Fundraiser updated successfully!' });
+    });
+});
 module.exports = router;

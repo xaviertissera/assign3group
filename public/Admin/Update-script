@@ -1,0 +1,49 @@
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('updateFundraiserForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Get form values
+        const id = document.getElementById('update_id').value;
+        const organizer = document.getElementById('update_organizer').value;
+        const caption = document.getElementById('update_caption').value;
+        const target_funding = document.getElementById('update_target_funding').value;
+        const city = document.getElementById('update_city').value;
+        const category_id = document.getElementById('update_category_id').value;
+        const active = document.querySelector('input[name="status"]:checked').value; // Active or Inactive
+
+        // Validate form fields
+        if (!category_id) {
+            alert('Please select a valid category.');
+            return;  // Stop form submission if no valid category is selected
+        }
+
+        // Submit form data via fetch (AJAX)
+        fetch('http://localhost:3000/api/update-fundraiser', {
+            method: 'PUT', // HTTP PUT request for updating
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id,
+                organizer: organizer,
+                caption: caption,
+                target_funding: target_funding,
+                city: city,
+                category_id: category_id,
+                active: active  // Include the active/inactive status from radio button
+            })
+        })
+        .then(response => response.json()) // Parse JSON response
+        .then(data => {
+            if (data.success) {
+                alert('Fundraiser updated successfully!');
+            } else {
+                alert('Error updating fundraiser: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while updating the fundraiser.');
+        });
+    });
+});
