@@ -1,37 +1,58 @@
-document.getElementById('addFundraiserForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Get form values
-    const organizer = document.getElementById('organizer').value;
-    const caption = document.getElementById('caption').value;
-    const target_funding = document.getElementById('target_funding').value;
-    const city = document.getElementById('city').value;
-    const category_id = document.getElementById('category_id').value;
-
-    // Send form data via fetch (AJAX)
-    fetch('/api/add-fundraiser', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            organizer: organizer,
-            caption: caption,
-            target_funding: target_funding,
-            city: city,
-            category_id: category_id
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch categories and populate the dropdown
+    fetch('/api/categories')
+        .then(response => response.json())
+        .then(data => {
+            const categoryDropdown = document.getElementById('category');
+            data.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.CATEGORY_ID;
+                option.text = category.NAME;
+                categoryDropdown.appendChild(option);
+            });
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Fundraiser added successfully!');
-        } else {
-            alert('Error adding fundraiser: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while adding the fundraiser.');
+        .catch(error => {
+            console.error('Error loading categories:', error);
+        });
+
+    // Handle form submission
+    document.getElementById('addFundraiserForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Get form values
+        const organizer = document.getElementById('organizer').value;
+        const caption = document.getElementById('caption').value;
+        const target_funding = document.getElementById('target_funding').value;
+        const city = document.getElementById('city').value;
+        const category_id = document.getElementById('category').value;  // Dropdown category
+        const active = document.getElementById('active').checked ? 1 : 0;  // Active/inactive status
+
+        // Send form data via fetch (AJAX)
+        fetch('/api/add-fundraiser', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                organizer: organizer,
+                caption: caption,
+                target_funding: target_funding,
+                city: city,
+                category_id: category_id,
+                active: active  // Include the active/inactive status
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Fundraiser added successfully!');
+            } else {
+                alert('Error adding fundraiser: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while adding the fundraiser.');
+        });
     });
 });
