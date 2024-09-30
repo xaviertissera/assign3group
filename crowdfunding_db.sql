@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: crowdfunding_db
 -- ------------------------------------------------------
--- Server version	8.0.39
+-- Server version  8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `category` (
   `CATEGORY_ID` int NOT NULL AUTO_INCREMENT,
   `NAME` varchar(100) NOT NULL,
   PRIMARY KEY (`CATEGORY_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,7 +55,7 @@ CREATE TABLE `donation` (
   PRIMARY KEY (`DONATION_ID`),
   KEY `FUNDRAISER_ID` (`FUNDRAISER_ID`),
   CONSTRAINT `donation_ibfk_1` FOREIGN KEY (`FUNDRAISER_ID`) REFERENCES `fundraiser` (`FUNDRAISER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,17 @@ CREATE TABLE `donation` (
 
 LOCK TABLES `donation` WRITE;
 /*!40000 ALTER TABLE `donation` DISABLE KEYS */;
-INSERT INTO `donation` VALUES (1,'2024-01-15',200.00,'Xavier Tissera',1),(2,'2024-02-20',300.00,'Anna Smith',2),(3,'2024-03-10',150.00,'Michael Brown',3),(4,'2024-03-22',100.00,'Emma Davis',4),(5,'2024-04-05',250.00,'Sophia Taylor',5),(6,'2024-04-18',300.00,'James Johnson',1),(7,'2024-05-09',175.00,'Olivia White',2),(8,'2024-05-20',500.00,'Liam Harris',3),(9,'2024-06-12',120.00,'Emily Thomas',4),(10,'2024-06-25',350.00,'Noah Lee',5);
+INSERT INTO `donation` VALUES 
+(1,'2024-01-15',200.00,'Xavier Tissera',1),
+(2,'2024-02-20',300.00,'Anna Smith',2),
+(3,'2024-03-10',150.00,'Michael Brown',3),
+(4,'2024-03-22',100.00,'Emma Davis',4),
+(5,'2024-04-05',250.00,'Sophia Taylor',5),
+(6,'2024-04-18',300.00,'James Johnson',1),
+(7,'2024-05-09',175.00,'Olivia White',2),
+(8,'2024-05-20',500.00,'Liam Harris',3),
+(9,'2024-06-12',120.00,'Emily Thomas',4),
+(10,'2024-06-25',350.00,'Noah Lee',5);
 /*!40000 ALTER TABLE `donation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +97,7 @@ CREATE TABLE `fundraiser` (
   PRIMARY KEY (`FUNDRAISER_ID`),
   KEY `CATEGORY_ID` (`CATEGORY_ID`),
   CONSTRAINT `fundraiser_ibfk_1` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`CATEGORY_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,11 +106,21 @@ CREATE TABLE `fundraiser` (
 
 LOCK TABLES `fundraiser` WRITE;
 /*!40000 ALTER TABLE `fundraiser` DISABLE KEYS */;
-INSERT INTO `fundraiser` VALUES (1,'John Doe','Support Melbourne Hospitals',60000.00,15000.00,'Melbourne',0,1),(2,'Jane Smith','Scholarships for Melbourne Students',40000.00,12000.00,'Melbourne',1,2),(3,'Michael Johnson','Clean the Yarra River',35000.00,10000.00,'Melbourne',1,3),(4,'Emily Davis','Mental Health Support in Melbourne',50000.00,20000.00,'Melbourne',1,1),(5,'Robert Brown','Tree Planting in Melbourne Parks',25000.00,8000.00,'Melbourne',1,3),(6,'Anna Lee','Support Refugees in Melbourne',50000.00,12000.00,'Melbourne',1,1),(7,'Chris Green','Education for Underprivileged Children',30000.00,8000.00,'Melbourne',1,2),(8,'Lisa White','Clean Melbourne Beaches',25000.00,5000.00,'Melbourne',1,3),(9,'David Black','Mental Health Awareness Campaign',60000.00,15000.00,'Melbourne',1,1),(10,'Sarah Stone','Green Spaces for Urban Areas',45000.00,9000.00,'Melbourne',1,3);
+INSERT INTO `fundraiser` VALUES 
+(1,'John Doe','Support Melbourne Hospitals',60000.00,15000.00,'Melbourne',0,1),
+(2,'Jane Smith','Scholarships for Melbourne Students',40000.00,12000.00,'Melbourne',1,2),
+(3,'Michael Johnson','Clean the Yarra River',35000.00,10000.00,'Melbourne',1,3),
+(4,'Emily Davis','Mental Health Support in Melbourne',50000.00,20000.00,'Melbourne',1,1),
+(5,'Robert Brown','Tree Planting in Melbourne Parks',25000.00,8000.00,'Melbourne',1,3),
+(6,'Anna Lee','Support Refugees in Melbourne',50000.00,12000.00,'Melbourne',1,1),
+(7,'Chris Green','Education for Underprivileged Children',30000.00,8000.00,'Melbourne',1,2),
+(8,'Lisa White','Clean Melbourne Beaches',25000.00,5000.00,'Melbourne',1,3),
+(9,'David Black','Mental Health Awareness Campaign',60000.00,15000.00,'Melbourne',1,1),
+(10,'Sarah Stone','Green Spaces for Urban Areas',45000.00,9000.00,'Melbourne',1,3);
 /*!40000 ALTER TABLE `fundraiser` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
@@ -108,5 +128,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2024-09-28 17:17:31
