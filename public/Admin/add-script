@@ -24,10 +24,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const caption = document.getElementById('caption').value;
         const target_funding = document.getElementById('target_funding').value;
         const city = document.getElementById('city').value;
-        const category_id = document.getElementById('category').value;  // Dropdown category
-        const active = document.getElementById('active').checked ? 1 : 0;  // Active/inactive status
+        const category_id = document.getElementById('category').value;
+        
+        // Get the selected status (Active or Inactive) using querySelector for radio buttons
+        const active = document.querySelector('input[name="status"]:checked').value;
 
-        // Send form data via fetch (AJAX)
+        // Validate category selection
+        if (!category_id) {
+            alert('Please select a valid category.');
+            return;  // Stop form submission if no valid category is selected
+        }
+
+        // Submit form data via fetch (AJAX)
         fetch('/api/add-fundraiser', {
             method: 'POST',
             headers: {
@@ -39,15 +47,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 target_funding: target_funding,
                 city: city,
                 category_id: category_id,
-                active: active  // Include the active/inactive status
+                active: active  // Include the active/inactive status from radio button
             })
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data);  // Log the server response for debugging
             if (data.success) {
                 alert('Fundraiser added successfully!');
             } else {
-                alert('Error adding fundraiser: ' + data.message);
+                alert('Error adding fundraiser: ' + (data.message || 'Unknown error'));
             }
         })
         .catch(error => {
