@@ -195,5 +195,30 @@ router.get('/fundraisers', (req, res) => {
         }
     });
 });
+// API route to handle adding a new fundraiser
+router.post('/add-fundraiser', (req, res) => {
+    const { organizer, caption, target_funding, city, category_id } = req.body;
 
+    // Validation to check if all fields are provided
+    if (!organizer || !caption || !target_funding || !city || !category_id) {
+        return res.status(400).json({ success: false, message: 'Please provide all required fields.' });
+    }
+
+    // SQL query to insert a new fundraiser
+    const query = `
+        INSERT INTO fundraiser (ORGANIZER, CAPTION, TARGET_FUNDING, CITY, CATEGORY_ID, ACTIVE, CURRENT_FUNDING)
+        VALUES (?, ?, ?, ?, ?, 1, 0);
+    `;
+
+    // Execute the query
+    connection.query(query, [organizer, caption, target_funding, city, category_id], (err, result) => {
+        if (err) {
+            console.error("Error while inserting fundraiser:", err);
+            return res.status(500).json({ success: false, message: 'Database error. Failed to add fundraiser.' });
+        }
+
+        // Respond with success message
+        return res.status(200).json({ success: true, message: 'Fundraiser added successfully!' });
+    });
+});
 module.exports = router;
