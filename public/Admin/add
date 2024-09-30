@@ -1,0 +1,37 @@
+document.getElementById('addFundraiserForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get form values
+    const organizer = document.getElementById('organizer').value;
+    const caption = document.getElementById('caption').value;
+    const target_funding = document.getElementById('target_funding').value;
+    const city = document.getElementById('city').value;
+    const category_id = document.getElementById('category_id').value;
+
+    // Send form data via fetch (AJAX)
+    fetch('/api/add-fundraiser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            organizer: organizer,
+            caption: caption,
+            target_funding: target_funding,
+            city: city,
+            category_id: category_id
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Fundraiser added successfully!');
+        } else {
+            alert('Error adding fundraiser: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while adding the fundraiser.');
+    });
+});
