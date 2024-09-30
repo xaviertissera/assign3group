@@ -99,5 +99,5 @@ document.getElementById('donation-form').addEventListener('submit', function (ev
     .catch(error => console.error('Error submitting donation:', error));
 });
 
-// Fetch the fundraiser details when the page loads
+// fetch the fundraiser details when the page loads
 window.onload = fetchFundraiserDetails;
