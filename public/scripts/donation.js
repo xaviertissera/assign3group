@@ -1,10 +1,10 @@
-// Get the fundraiser ID from the query string
+// Get the fundraiser ID
 function getFundraiserId() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
 
-// Fetch fundraiser details and populate the form
+// Fetch fundraiser details
 function fetchFundraiserDetails() {
     const fundraiserId = getFundraiserId();
 
@@ -20,7 +20,7 @@ function fetchFundraiserDetails() {
 function hideAlertAfterTimeout(alertElement) {
     setTimeout(() => {
         alertElement.classList.add('d-none');  // Hide the alert after 3 seconds
-    }, 3000);  // 3000 milliseconds = 3 seconds
+    }, 3000);  
 }
 
 // Handle form submission
@@ -44,19 +44,19 @@ document.getElementById('donation-form').addEventListener('submit', function (ev
 
     // 1. Check if the name is missing
     if (!giverName) {
-        errorMessages.push('-Name is required.');
+        errorMessages.push('- Name is required.');
     }
 
     // 2. Check if the donation amount is missing or below the minimum value
     if (!donationAmount || isNaN(donationAmount)) {
-        errorMessages.push('-Enter your donation amount.');
+        errorMessages.push('- Enter your donation amount.');
     } else if (donationAmount < 5) {
-        errorMessages.push('-The minimum donation is 5 AUD.');
+        errorMessages.push('- The minimum donation is 5 AUD.');
     }
 
     // If there are any error messages, show the alert with all messages
     if (errorMessages.length > 0) {
-        errorMessageElement.innerHTML = errorMessages.join('<br>');  // Join all error messages with a line break
+        errorMessageElement.innerHTML = errorMessages.join('<br>');
         errorAlert.classList.remove('d-none');  // Show the alert
         hideAlertAfterTimeout(errorAlert);  // Hide after timeout
         return;  // Stop form submission
@@ -84,20 +84,20 @@ document.getElementById('donation-form').addEventListener('submit', function (ev
             const message = `Thank you for your donation to ${data.fundraiserCaption}`;
             document.getElementById('thankYouMessage').textContent = message;
             const thankYouAlert = document.getElementById('thankYouAlert');
-            thankYouAlert.classList.remove('d-none');  // Show the success alert
+            thankYouAlert.classList.remove('d-none');
 
-            // Automatically redirect after 3 seconds
+            // Automatically redirect after 2 seconds
             setTimeout(() => {
                 window.location.href = `/fundraiser.html?id=${fundraiserId}`;
-            }, 3000);
+            }, 2000);
         } else {
             errorMessageElement.textContent = data.message;
-            errorAlert.classList.remove('d-none');  // Show the alert
-            hideAlertAfterTimeout(errorAlert);  // Hide after timeout
+            errorAlert.classList.remove('d-none'); 
+            hideAlertAfterTimeout(errorAlert); 
         }
     })
     .catch(error => console.error('Error submitting donation:', error));
 });
 
-// Fetch the fundraiser details when the page loads
+// fetch the fundraiser details when the page loads
 window.onload = fetchFundraiserDetails;

@@ -141,9 +141,9 @@ router.post('/donation', (req, res) => {
         return res.status(400).json({ message: "Minimum donation amount is 5 AUD" });
     }
 
-    // First, get the fundraiser caption
+    // First, get the fundraiser caption and current funding
     const getFundraiserQuery = `
-        SELECT CAPTION FROM fundraiser WHERE FUNDRAISER_ID = ?;
+        SELECT CAPTION, CURRENT_FUNDING FROM fundraiser WHERE FUNDRAISER_ID = ?;
     `;
 
     connection.query(getFundraiserQuery, [fundraiserId], (err, fundraiserResult) => {
@@ -157,6 +157,7 @@ router.post('/donation', (req, res) => {
         }
 
         const fundraiserCaption = fundraiserResult[0].CAPTION;
+        const currentFunding = fundraiserResult[0].CURRENT_FUNDING;
 
         // Now, insert the donation
         const insertDonationQuery = `
@@ -170,14 +171,29 @@ router.post('/donation', (req, res) => {
                 return res.status(500).send("Error while inserting donation.");
             }
 
-            // Send success message along with the fundraiser caption
-            res.json({
-                message: "Donation successfully added",
-                fundraiserCaption: fundraiserCaption  // Send the caption in response
+            // Update the fundraiser's current funding
+            const updateFundingQuery = `
+                UPDATE fundraiser
+                SET CURRENT_FUNDING = CURRENT_FUNDING + ?
+                WHERE FUNDRAISER_ID = ?;
+            `;
+
+            connection.query(updateFundingQuery, [amount, fundraiserId], (updateErr) => {
+                if (updateErr) {
+                    console.error("Error while updating current funding:", updateErr);
+                    return res.status(500).send("Error while updating current funding.");
+                }
+
+                // Send success message along with the fundraiser caption
+                res.json({
+                    message: "Donation successfully added",
+                    fundraiserCaption: fundraiserCaption  // Send the caption in response
+                });
             });
         });
     });
 });
+
 
 // Retrieve all fundraisers with id, caption, organizer, and active status
 router.get('/fundraisers', (req, res) => {
