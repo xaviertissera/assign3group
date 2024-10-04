@@ -1,58 +1,84 @@
-// Function to validate Add New Fundraiser form
-function validateFundraiserForm() {
-    // Get form elements
-    var organizer = document.getElementById("organizer").value;
-    var caption = document.getElementById("caption").value;
-    var targetFunding = document.getElementById("target_funding").value;
-    var city = document.getElementById("city").value;
-    var category = document.getElementById("category").value;
+// Handle Fundraiser Form Submission
+document.getElementById('fundraiserForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-    // Validate that all fields are filled
-    if (organizer === "" || caption === "" || targetFunding === "" || city === "" || category === "") {
-        alert("Please fill in all fields in the Add New Fundraiser form.");
-        return false; // Prevent form submission
-    }
+    // Get form values
+    const organizer = document.getElementById('organizer').value;
+    const caption = document.getElementById('caption').value;
+    const targetFunding = document.getElementById('target_funding').value;
+    const city = document.getElementById('city').value;
+    const category = document.getElementById('category').value;
+    const status = document.querySelector('input[name="status"]:checked').value;
 
-    // Validate that target funding is a positive number
-    if (targetFunding <= 0) {
-        alert("Target funding must be a positive number.");
-        return false; // Prevent form submission
-    }
+    // Construct the data object
+    const fundraiserData = {
+        organizer: organizer,
+        caption: caption,
+        target_funding: targetFunding,
+        city: city,
+        category_id: category,
+        active: status === 'active' ? 1 : 0 // Convert status to 1 or 0
+    };
 
-    return true; // If all validations pass, allow form submission
-}
-
-// Function to validate Donation form
-function validateDonationForm() {
-    // Get form elements
-    var donationDate = document.getElementById("date").value;
-    var donationAmount = document.getElementById("amount").value;
-    var giverName = document.getElementById("giver").value;
-
-    // Validate that all fields are filled
-    if (donationDate === "" || donationAmount === "" || giverName === "") {
-        alert("Please fill in all fields in the Donation form.");
-        return false; // Prevent form submission
-    }
-
-    // Validate that donation amount is a positive number
-    if (donationAmount <= 0) {
-        alert("Donation amount must be a positive number.");
-        return false; // Prevent form submission
-    }
-
-    return true; // If all validations pass, allow form submission
-}
-
-// Attach event listeners to forms
-document.querySelector("form[action='/submit_fundraiser']").addEventListener("submit", function (event) {
-    if (!validateFundraiserForm()) {
-        event.preventDefault(); // Prevent form submission if validation fails
-    }
+    // Send POST request to API
+    fetch('/submit_fundraiser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fundraiserData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Fundraiser added successfully!');
+            document.getElementById('fundraiserForm').reset(); // Clear form
+        } else {
+            alert('Failed to add fundraiser');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error submitting the fundraiser');
+    });
 });
 
-document.querySelector("form[action='/submit_donation']").addEventListener("submit", function (event) {
-    if (!validateDonationForm()) {
-        event.preventDefault(); // Prevent form submission if validation fails
-    }
+// Handle Donation Form Submission
+document.querySelector('form[action="/submit_donation"]').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Get form values
+    const date = document.getElementById('date').value;
+    const amount = document.getElementById('amount').value;
+    const giver = document.getElementById('giver').value;
+
+    // Construct the data object
+    const donationData = {
+        date: date,
+        amount: amount,
+        giver: giver,
+        fundraiser_id: document.getElementById('fundraiser').value // Assuming selected fundraiser
+    };
+
+    // Send POST request to API
+    fetch('/submit_donation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(donationData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Donation submitted successfully!');
+            document.querySelector('form[action="/submit_donation"]').reset(); // Clear form
+        } else {
+            alert('Failed to submit donation');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error submitting the donation');
+    });
 });
