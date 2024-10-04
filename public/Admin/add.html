@@ -38,30 +38,35 @@
     <!-- Add New Fundraiser Form -->
     <section class="container mt-5">
         <h2>Add a New Fundraiser</h2>
-        <form action="/submit_fundraiser" method="POST">
+        <form id="fundraiserForm" action="/submit_fundraiser" method="POST">
+            <!-- Organizer -->
             <div class="form-group">
                 <label for="organizer">Organizer Name:</label>
-                <input type="text" class="form-control" id="organizer" name="organizer" placeholder="Enter your name">
+                <input type="text" class="form-control" id="organizer" name="organizer" placeholder="Enter your name" required>
             </div>
 
+            <!-- Caption -->
             <div class="form-group">
                 <label for="caption">Campaign Caption:</label>
-                <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter a short caption for the campaign">
+                <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter a short caption for the campaign" required>
             </div>
 
+            <!-- Target Funding -->
             <div class="form-group">
                 <label for="target_funding">Target Funding (in USD):</label>
-                <input type="number" class="form-control" id="target_funding" name="target_funding" step="0.01" placeholder="Enter target amount">
+                <input type="number" class="form-control" id="target_funding" name="target_funding" step="0.01" placeholder="Enter target amount" required>
             </div>
 
+            <!-- City -->
             <div class="form-group">
                 <label for="city">City:</label>
-                <input type="text" class="form-control" id="city" name="city" placeholder="Enter the city">
+                <input type="text" class="form-control" id="city" name="city" placeholder="Enter the city" required>
             </div>
 
+            <!-- Category -->
             <div class="form-group">
                 <label for="category">Choose a Category:</label>
-                <select id="category" class="form-control" name="category">
+                <select id="category" class="form-control" name="category" required>
                     <option value="1">Health</option>
                     <option value="2">Education</option>
                     <option value="3">Environment</option>
@@ -109,7 +114,6 @@
                 </select>
             </div>
             <input type="submit" class="btn btn-primary" value="Select Fundraiser">
-            <form action="http://localhost:3000/submit_fundraiser" method="POST">
         </form>
     </section>
 
@@ -121,17 +125,17 @@
         <form action="/submit_donation" method="POST">
             <div class="form-group">
                 <label for="date">Donation Date:</label>
-                <input type="date" class="form-control" id="date" name="date">
+                <input type="date" class="form-control" id="date" name="date" required>
             </div>
 
             <div class="form-group">
                 <label for="amount">Donation Amount:</label>
-                <input type="number" class="form-control" id="amount" name="amount" step="0.01" placeholder="Enter amount">
+                <input type="number" class="form-control" id="amount" name="amount" step="0.01" placeholder="Enter amount" required>
             </div>
 
             <div class="form-group">
                 <label for="giver">Your Name:</label>
-                <input type="text" class="form-control" id="giver" name="giver" placeholder="Enter your name">
+                <input type="text" class="form-control" id="giver" name="giver" placeholder="Enter your name" required>
             </div>
 
             <input type="submit" class="btn btn-primary" value="Donate">
