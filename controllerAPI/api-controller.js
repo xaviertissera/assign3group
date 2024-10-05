@@ -212,8 +212,6 @@ router.get('/fundraisers', (req, res) => {
     });
 });
 
-<<<<<<< Updated upstream
-=======
 
 // Add a new fundraiser to the database
 // Add a new fundraiser
@@ -267,5 +265,4 @@ router.put('/api/update-fundraiser', (req, res) => {
         return res.status(200).json({ success: true, message: 'Fundraiser updated successfully!' });
     });
 });
->>>>>>> Stashed changes
 module.exports = router;
