@@ -1,4 +1,4 @@
-// Fetch categories and populate the selector
+//D Fetch categories and populate the selector
 fetch('/api/concertsx/categories')
     .then(response => response.json())
     .then(categories => {
