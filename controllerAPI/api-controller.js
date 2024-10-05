@@ -212,4 +212,60 @@ router.get('/fundraisers', (req, res) => {
     });
 });
 
+<<<<<<< Updated upstream
+=======
+
+// Add a new fundraiser to the database
+// Add a new fundraiser
+router.post('/add-fundraiser', (req, res) => {
+    const { organizer, caption, target_funding, current_funding, city, active, category_id } = req.body;
+    
+    const query = `
+        INSERT INTO fundraiser (ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+    
+    connection.query(query, [organizer, caption, target_funding, current_funding, city, active, category_id], (err, result) => {
+        if (err) {
+            console.error("Error while adding fundraiser:", err);
+            res.status(500).send("Error while adding fundraiser.");
+        } else {
+            res.json({ message: "Fundraiser added successfully", fundraiser_id: result.insertId });
+        }
+    });
+});
+
+
+
+
+// API route to handle updating an existing fundraiser
+router.put('/api/update-fundraiser', (req, res) => {
+    const { id, organizer, caption, target_funding, city, category_id, active } = req.body;
+
+    // Validate that all fields are provided
+    if (!id || !organizer || !caption || !target_funding || !city || !category_id || active === undefined) {
+        return res.status(400).json({ success: false, message: 'Please provide all required fields.' });
+    }
+
+    // SQL query to update the existing fundraiser
+    const query = `
+        UPDATE fundraiser 
+        SET ORGANIZER = ?, CAPTION = ?, TARGET_FUNDING = ?, CITY = ?, CATEGORY_ID = ?, ACTIVE = ?
+        WHERE FUNDRAISER_ID = ?;
+    `;
+
+    connection.query(query, [organizer, caption, target_funding, city, category_id, active, id], (err, result) => {
+        if (err) {
+            console.error('Error updating fundraiser:', err);
+            return res.status(500).json({ success: false, message: 'Database error. Unable to update fundraiser.' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: 'Fundraiser not found.' });
+        }
+
+        return res.status(200).json({ success: true, message: 'Fundraiser updated successfully!' });
+    });
+});
+>>>>>>> Stashed changes
 module.exports = router;
