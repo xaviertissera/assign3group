@@ -276,4 +276,25 @@ router.put('/api/update-fundraiser', (req, res) => {
         return res.status(200).json({ success: true, message: 'Fundraiser updated successfully!' });
     });
 });
+
+
+// Add a new fundraiser
+router.post('/add-fundraiser-new', (req, res) => {
+    const { organizer, caption, target_funding, current_funding, city, active, category_id } = req.body;
+    
+    const query = `
+        INSERT INTO fundraiser (ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+    
+    connection.query(query, [organizer, caption, target_funding, current_funding, city, active, category_id], (err, result) => {
+        if (err) {
+            console.error("Error while adding fundraiser:", err);
+            res.status(500).send("Error while adding fundraiser.");
+        } else {
+            res.json({ message: "Fundraiser added successfully", fundraiser_id: result.insertId });
+        }
+    });
+});
+
 module.exports = router;

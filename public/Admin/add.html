@@ -33,6 +33,37 @@
         </div>
     </nav>
 
+    <h1>Add New Fundraiser</h1>
+    
+    <form id="addFundraiserForm">
+        <label for="organizer">Organizer:</label>
+        <input type="text" id="organizer" name="organizer" required>
+
+        <label for="caption">Caption:</label>
+        <input type="text" id="caption" name="caption" required>
+
+        <label for="target_funding">Target Funding:</label>
+        <input type="number" id="target_funding" name="target_funding" required>
+
+        <label for="current_funding">Current Funding:</label>
+        <input type="number" id="current_funding" name="current_funding" value="0" required>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+
+        <label for="active">Active (1 for yes, 0 for no):</label>
+        <input type="number" id="active" name="active" value="1" required>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category_id" required>
+            <!-- Categories will be dynamically loaded here -->
+        </select>
+
+        <button type="submit">Add Fundraiser</button>
+    </form>
+
+    <script src="admin-add.js"></script>
+
     <h1 class="text-center mt-5">Crowdfunding Platform</h1>
 
     <!-- Add New Fundraiser Form -->
