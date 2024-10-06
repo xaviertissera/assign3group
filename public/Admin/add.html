@@ -6,8 +6,9 @@
     <title>Add New Fundraiser & Make a Donation</title> 
     
     <!-- Link to the external stylesheet -->
-    <link rel="stylesheet" href="style2.css">
-    
+    <link rel="stylesheet" href="public/Admin/add-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5">
+
     <!-- Link to Bootstrap stylesheet -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -16,7 +17,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="../index.html">Client-View</a>
+            <a class="navbar-brand" href="../index.html">Start Making a Difference Today!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,37 +33,6 @@
             </div>
         </div>
     </nav>
-
-    <h1>Add New Fundraiser</h1>
-    
-    <form id="addFundraiserForm">
-        <label for="organizer">Organizer:</label>
-        <input type="text" id="organizer" name="organizer" required>
-
-        <label for="caption">Caption:</label>
-        <input type="text" id="caption" name="caption" required>
-
-        <label for="target_funding">Target Funding:</label>
-        <input type="number" id="target_funding" name="target_funding" required>
-
-        <label for="current_funding">Current Funding:</label>
-        <input type="number" id="current_funding" name="current_funding" value="0" required>
-
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required>
-
-        <label for="active">Active (1 for yes, 0 for no):</label>
-        <input type="number" id="active" name="active" value="1" required>
-
-        <label for="category">Category:</label>
-        <select id="category" name="category_id" required>
-            <!-- Categories will be dynamically loaded here -->
-        </select>
-
-        <button type="submit">Add Fundraiser</button>
-    </form>
-
-    <script src="admin-add.js"></script>
 
     <h1 class="text-center mt-5">Crowdfunding Platform</h1>
 
@@ -176,7 +146,51 @@
     <!-- Footer Section -->
     <footer class="footer bg-dark text-white mt-5 py-3">
         <div class="container text-center">
-            <p class="mb-0">Developed by <strong>Xavier</strong> and <strong>Thisuka</strong></p>
+            <footer class="ftco-footer ftco-section img">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-md-4">
+                            <div class="ftco-footer-widget mb-4">
+                                <h2 class="ftco-heading-2">About Us</h2>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                                    there live the blind texts.</p>
+                                <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-3">
+                            <div class="ftco-footer-widget mb-4 ml-md-4">
+                                <h2 class="ftco-heading-2">Site Links</h2>
+                                <ul class="list-unstyled">
+                                    <li><a href="public\index.html" class="py-2 d-block">Home</a></li>
+                                    <li><a href="#" class="py-2 d-block">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="ftco-footer-widget mb-4">
+                                <h2 class="ftco-heading-2">Have a Questions?</h2>
+                                <div class="block-23 mb-3">
+                                    <ul>
+                                        <li><span class="icon icon-map-marker"></span><span class="text">203, Ardgower Rd, Noble
+                                                Park 3174</span></li>
+                                        <li><a href="#"><span class="icon icon-phone"></span><span
+                                                    class="text">0451234543</span></a></li>
+                                        <li><a href="#"><span class="icon icon-envelope"></span><span
+                                                    class="text">info@newlife.com</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">        
+            <p class="mb-0"><strong>Developed by </strong> <strong>Xavier and Thisuka</strong></p>
         </div>
     </footer>
 
