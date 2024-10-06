@@ -1,0 +1,255 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+/* CSS Variables for Easy Customization */
+:root {
+    --primary-color: #00c8ffa5;
+    --secondary-color: #5b8abc;
+    --background-color: #363d4411;
+    --text-color: #333;
+    --light-color: #e9ecef;
+    --dark-color: #343a40;
+    --border-radius: 10px;
+    --padding: 20px;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Typography */
+h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 700;
+    animation: slideDown 0.8s ease-in-out;
+}
+
+p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--padding);
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease-in-out;
+}
+
+/* Section Divider */
+.section-divider {
+    height: 5px;
+    width: 100px;
+    margin: 40px auto;
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius);
+}
+
+/* Navbar */
+.navbar {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.navbar-brand {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    color: #ffffff;
+    transition: color 0.3s ease-in-out, transform 0.3s;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: var(--light-color);
+    transform: translateY(-5px);
+}
+
+/* Icons */
+.nav-link::before {
+    content: ''; /* Font Awesome icons (can be customized) */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+/* Ripple Effect for Buttons */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-position: center;
+    background-size: 300%;
+    background-repeat: no-repeat;
+    transition: background 0.8s;
+}
+
+.ripple:active::after {
+    background-size: 100%;
+    transition: background 0s;
+}
+
+/* Form Styles */
+form {
+    background-color: var(--light-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    transition: box-shadow 0.3s ease-in-out;
+    animation: fadeInUp 0.6s ease-in-out;
+}
+
+form:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="date"],
+form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    animation: fadeInUp 0.6s ease-in-out;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form input[type="date"]:focus,
+form select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    background-color: #e9f5ff;
+}
+
+/* Buttons */
+form button, input[type="submit"] {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: bounceIn 0.8s ease-in-out;
+    position: relative;
+}
+
+form button:hover, input[type="submit"]:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+form button:active, input[type="submit"]:active {
+    background-color: #003f7f;
+    transform: translateY(0);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.footer strong {
+    color: var(--primary-color);
+}
+
+.footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--secondary-color);
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position the tooltip */
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
