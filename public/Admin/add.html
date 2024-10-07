@@ -92,57 +92,6 @@
             <input type="submit" class="btn btn-primary" value="Submit Fundraiser">
         </form>
     </section>
-
-    <hr>
-
-    <!-- Fundraiser Selection Section -->
-    <section class="container mt-5">
-        <h2>Select a Fundraiser</h2>
-        <form action="/select_fundraiser" method="POST">
-            <div class="form-group">
-                <label for="fundraiser">Choose a fundraiser:</label>
-                <select id="fundraiser" class="form-control" name="fundraiser">
-                    <option value="1">Support Melbourne Hospitals - Target: $60,000</option>
-                    <option value="2">Scholarships for Melbourne Students - Target: $40,000</option>
-                    <option value="3">Clean the Yarra River - Target: $35,000</option>
-                    <option value="4">Mental Health Support in Melbourne - Target: $50,000</option>
-                    <option value="5">Tree Planting in Melbourne Parks - Target: $25,000</option>
-                    <option value="6">Support Refugees in Melbourne - Target: $50,000</option>
-                    <option value="7">Education for Underprivileged Children - Target: $30,000</option>
-                    <option value="8">Clean Melbourne Beaches - Target: $25,000</option>
-                    <option value="9">Mental Health Awareness Campaign - Target: $60,000</option>
-                    <option value="10">Green Spaces for Urban Areas - Target: $45,000</option>
-                </select>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Select Fundraiser">
-        </form>
-    </section>
-
-    <hr>
-
-    <!-- Donation Form -->
-    <section class="container mt-5">
-        <h2>Make a Donation</h2>
-        <form action="/submit_donation" method="POST">
-            <div class="form-group">
-                <label for="date">Donation Date:</label>
-                <input type="date" class="form-control" id="date" name="date" required>
-            </div>
-
-            <div class="form-group">
-                <label for="amount">Donation Amount:</label>
-                <input type="number" class="form-control" id="amount" name="amount" step="0.01" placeholder="Enter amount" required>
-            </div>
-
-            <div class="form-group">
-                <label for="giver">Your Name:</label>
-                <input type="text" class="form-control" id="giver" name="giver" placeholder="Enter your name" required>
-            </div>
-
-            <input type="submit" class="btn btn-primary" value="Donate">
-        </form>
-    </section>
-
     <!-- Footer Section -->
     <footer class="footer bg-dark text-white mt-5 py-3">
         <div class="container text-center">
